@@ -10,6 +10,8 @@ services:
     restart: always
     volumes:
       - ${BBSHOME}:/home/bbs
+    networks: 
+      - bbs
   mongo:
     image: mongo:4.4.2
     restart: always
@@ -22,17 +24,23 @@ services:
     mem_reservation: ${MONGO_MEM}
     ports:
        - "27017:27017"
+    networks: 
+      - bbs
   redis:
     image: redis:6.0.9-alpine
     restart: always
     ports:
        - "6379:6379"
+    networks: 
+      - bbs
   postfix:
     image: chhsiao1981/docker-postfix
     volumes:
       - ${POSTFIX_MAIN_CF}:/etc/postfix/main.cf
       - ${POSTFIX_MASTER_CF}:/etc/postfix/master.cf
     restart: always
+    networks: 
+      - bbs
   openbbs-middleware:
     image: pttofficialapps/go-openbbsmiddleware:v0.20.0
     ports:
@@ -42,3 +50,15 @@ services:
       - ${ETC}:/etc/go-openbbsmiddleware
       - ${ETC}:/etc/go-pttbbs
     restart: always
+    networks: 
+      - bbs
+
+networks: 
+  bbs:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.251.112.0/24
+                gateway: 172.16.238.1
+              
