@@ -57,8 +57,7 @@ networks:
   bbs:
         driver: bridge
         ipam:
-            driver: default
             config:
                 - subnet: 172.251.112.0/24
-                gateway: 172.16.238.1
+                  gateway: 172.251.112.1
               
