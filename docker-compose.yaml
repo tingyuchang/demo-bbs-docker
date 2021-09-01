@@ -44,7 +44,6 @@ services:
     volumes:
       - ${STATIC_DIR}:/static
       - ${ETC}:/etc/go-openbbsmiddleware
-      - ${ETC}:/etc/go-pttbbs
     restart: always
     networks: 
       - bbs

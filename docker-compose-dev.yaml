@@ -39,6 +39,8 @@ services:
       - ${POSTFIX_MAIN_CF}:/etc/postfix/main.cf
       - ${POSTFIX_MASTER_CF}:/etc/postfix/master.cf
     restart: always
+    ports:
+       - "587:587"
     networks: 
       - bbs
 
